@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation.xml"
+    app:startDestination="@id/welcome">
+
+
+    <fragment
+        android:id="@+id/welcome"
+        android:name="com.ks.ks_quizlet.ui.Welcome"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/action_welcome_to_questions"
+            app:destination="@id/questions"
+            app:popUpTo="@id/welcome" />
+    </fragment>
+    <fragment
+        android:id="@+id/questions"
+        android:name="com.ks.ks_quizlet.ui.Questions"
+        android:label="fragment_questions"
+        tools:layout="@layout/fragment_questions" >
+        <action
+            android:id="@+id/action_questions_to_results"
+            app:destination="@id/results" />
+    </fragment>
+    <fragment
+        android:id="@+id/results"
+        android:name="com.ks.ks_quizlet.ui.Results"
+        android:label="fragment_results"
+        tools:layout="@layout/fragment_results" >
+        <action
+            android:id="@+id/action_results_to_welcome"
+            app:destination="@id/welcome"
+            app:popUpTo="@id/welcome"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>
