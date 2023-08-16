@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.ks.ks_quizlet.R
 import com.ks.ks_quizlet.databinding.FragmentQuestionsBinding
@@ -35,7 +36,19 @@ class Questions : Fragment() {
         viewPagerAdapter = ViewPagerAdapter(requireContext())
         dotscount = viewPagerAdapter.count
         binding.viewpager.adapter = viewPagerAdapter
+
         val dots = arrayOfNulls<ImageView>(dotscount)
+        initDefaultSlider(dots)
+        sliderChangeListener(dots)
+
+        binding.nextBtn.setOnClickListener {
+            val route = QuestionsDirections.actionQuestionsToResults()
+            findNavController().navigate(route)
+        }
+
+    }
+
+    private fun initDefaultSlider(dots: Array<ImageView?>) {
         for (i in 0 until dotscount) {
             dots[i] = ImageView(requireContext())
             dots[i]!!.setImageDrawable(
@@ -57,7 +70,9 @@ class Questions : Fragment() {
                 R.drawable.active_dot
             )
         )
+    }
 
+    private fun sliderChangeListener(dots: Array<ImageView?>) {
         binding.viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(
                 position: Int,
@@ -76,7 +91,7 @@ class Questions : Fragment() {
                         )
                     )
                 }
-                for (i in 0 until  position+1) {
+                for (i in 0 until position + 1) {
                     dots[i]?.setImageDrawable(
                         ContextCompat.getDrawable(
                             requireContext(),
@@ -84,12 +99,6 @@ class Questions : Fragment() {
                         )
                     )
                 }
-               /* dots[position]?.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        requireContext(),
-                        R.drawable.active_dot
-                    )
-                )*/
             }
 
             override fun onPageScrollStateChanged(state: Int) {
