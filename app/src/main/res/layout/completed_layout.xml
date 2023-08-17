@@ -1,56 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Welcome">
-
-    <!--TODO:   16,08-JUST DESIGNED THIS, add finishing touch and proceed to others-->
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Hello,"
-        android:textSize="24dp"
-        android:textColor="?attr/colorOnSurface"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ready for the Test?"
-        android:textSize="24dp"
+        android:layout_marginTop="147dp"
+        android:text="Completed"
         android:textColor="?attr/colorOnSurface"
+        android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/background_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="240dp"
+        android:layout_height="179dp"
         android:layout_marginTop="54dp"
-        android:src="@drawable/pana"
+        android:src="@drawable/done"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text2" />
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/get_started_btn"
+        android:id="@+id/view_results_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="97dp"
+        android:layout_marginTop="54dp"
         android:drawableStart="@drawable/send"
-        android:text="Get Started"
+        android:text="View Results"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/background_img" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.ks.ks_quizlet.databinding.FragmentResultsBinding
 
@@ -21,9 +22,19 @@ class Results : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.textView.setOnClickListener {
-            val route = ResultsDirections.actionResultsToWelcome()
-            findNavController().navigate(route)
+        binding.apply {
+            scoresView.apply {
+                retryBtn.setOnClickListener {
+                    val route = ResultsDirections.actionResultsToWelcome()
+                    findNavController().navigate(route)
+                }
+            }
+            completedView.apply {
+                viewResultsBtn.setOnClickListener {
+                    scoresView.root.isVisible = true
+                    completedView.root.isVisible = false
+                }
+            }
         }
     }
 }
