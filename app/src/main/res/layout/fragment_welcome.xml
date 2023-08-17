@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.Welcome">
 
-    <!--TODO:   16,08-JUST DESIGNED THIS, add finishing touch and proceed to others-->
-
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text1"
         android:layout_width="wrap_content"
