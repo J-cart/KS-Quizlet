@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -53,11 +54,6 @@ class Questions : Fragment(), AnswerRelay {
         initDefaultSlider(dots)
         sliderChangeListener(dots)
 
-        binding.nextBtn.setOnClickListener {
-            val route = QuestionsDirections.actionQuestionsToResults()
-            findNavController().navigate(route)
-        }
-
     }
 
     private fun initDefaultSlider(dots: Array<ImageView?>) {
@@ -91,7 +87,28 @@ class Questions : Fragment(), AnswerRelay {
                 positionOffset: Float,
                 positionOffsetPixels: Int
             ) {
+                binding.apply {
 
+                    backBtn.isVisible = position != 0
+                    backBtn.setOnClickListener {
+                        viewpager.currentItem = binding.viewpager.currentItem - 1
+                    }
+
+                    nextBtn.apply {
+                        if (position == viewPagerAdapter.count - 1) {
+                            text = "Finish"
+                            setOnClickListener {
+                                val route = QuestionsDirections.actionQuestionsToResults()
+                                findNavController().navigate(route)
+                            }
+                        } else {
+                            text = "Next"
+                            setOnClickListener {
+                                binding.viewpager.currentItem = binding.viewpager.currentItem + 1
+                            }
+                        }
+                    }
+                }
             }
 
             override fun onPageSelected(position: Int) {

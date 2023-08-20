@@ -50,8 +50,16 @@ class Results : Fragment() {
                 lifecycleScope.launch {
                     viewModel.totalScorePercentage.collect {
                         val color = if (it < 50.0) {
+                            statusTxt.text = "Try again!"
+                            retryBtn.text = "Retry"
+                            backgroundImg.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.fail))
                             ContextCompat.getColor(requireContext(), R.color.low_score)
                         } else {
+                            statusTxt.text = "Congratulations!"
+                            retryBtn.text = "Continue"
+                            backgroundImg.setImageDrawable(ContextCompat.getDrawable(requireContext(),
+                                R.drawable.congratulations
+                            ))
                             ContextCompat.getColor(requireContext(), R.color.normal_blue)
                         }
                         scoresView.scoresTxt.setTextColor(color)
