@@ -32,6 +32,7 @@ class ViewPagerAdapter(
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = layoutInflater!!.inflate(R.layout.questions_layout, container, false)
+        val questionNumber = view.findViewById<TextView>(R.id.question_number)
         val questionTxt = view.findViewById<TextView>(R.id.question_text)
         val answerGrp = view.findViewById<RadioGroup>(R.id.radioGroup)
         val answerBtn1 = view.findViewById<RadioButton>(R.id.radio_button_1)
@@ -40,6 +41,7 @@ class ViewPagerAdapter(
         val answerBtn4 = view.findViewById<RadioButton>(R.id.radio_button_4)
 
 
+        questionNumber.text = context.getString(R.string.question_number,position+1)
         questionTxt.text = questions[position].question
         answerBtn1.text = questions[position].options[0]
         answerBtn2.text = questions[position].options[1]
