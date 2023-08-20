@@ -22,7 +22,7 @@ class Welcome : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.textView.setOnClickListener {
+        binding.getStartedBtn.setOnClickListener {
             val route = WelcomeDirections.actionWelcomeToQuestions()
             findNavController().navigate(route)
         }

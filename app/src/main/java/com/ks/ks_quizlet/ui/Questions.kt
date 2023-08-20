@@ -8,17 +8,23 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.ks.ks_quizlet.R
 import com.ks.ks_quizlet.databinding.FragmentQuestionsBinding
-import com.ks.ks_quizlet.databinding.FragmentWelcomeBinding
+import com.ks.ks_quizlet.ui.adapter.ViewPagerAdapter
+import com.ks.ks_quizlet.util.AnswerRelay
+import com.ks.ks_quizlet.ui.arch.QuestionsViewModel
+import kotlinx.coroutines.launch
 
 
-class Questions : Fragment() {
+class Questions : Fragment(), AnswerRelay {
     private lateinit var binding: FragmentQuestionsBinding
     private var sliderDotsPanel: LinearLayout? = null
     private lateinit var viewPagerAdapter: ViewPagerAdapter
+    private val viewModel by activityViewModels<QuestionsViewModel>()
 
     private var dotscount = 0
     override fun onCreateView(
@@ -32,8 +38,14 @@ class Questions : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.loadQuestions()
         sliderDotsPanel = binding.sliderDots
-        viewPagerAdapter = ViewPagerAdapter(requireContext())
+        lifecycleScope.launch {
+            viewModel.questionsList.collect{
+                viewPagerAdapter = ViewPagerAdapter(requireContext(),this@Questions,it)
+            }
+        }
+
         dotscount = viewPagerAdapter.count
         binding.viewpager.adapter = viewPagerAdapter
 
@@ -107,5 +119,7 @@ class Questions : Fragment() {
         })
     }
 
-
+    override fun sendAnswers(answers: Map<Int, String>) {
+        viewModel.updateAnswers(answers)
+    }
 }

@@ -12,4 +12,5 @@
     <color name="normal_blue">#007AFF</color>
     <color name="dark_blue">#005cbf</color>
     <color name="light_active_blue">#b0d6ff</color>
+    <color name="low_score">#FF0E0E</color>
 </resources>
